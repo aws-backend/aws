@@ -1,6 +1,8 @@
 # Кастомная конфигурация окружения
 app:
   environment: Local
+  application:
+    version: "@application.version@"
 
 server:
   port: 8084
@@ -12,6 +14,10 @@ spring:
   mvc:
     servlet:
       path: /api/v1
+
+  output:
+    ansi:
+      enabled: always # Включить поддержку ANSI
 
 management:
   endpoints:

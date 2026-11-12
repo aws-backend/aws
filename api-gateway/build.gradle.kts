@@ -28,3 +28,28 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+/*
+ * Spring Boot build metadata.
+ * Generates META-INF/build-info.properties.
+ */
+springBoot {
+    buildInfo()
+}
+
+/*
+ * Replace only the application version token.
+ * Preserve Spring placeholders: ${...}
+ */
+tasks.processResources {
+    filteringCharset = "UTF-8"
+
+    filesMatching("**/application*.yml") {
+        filter { line ->
+            line.replace(
+                "@application.version@",
+                project.version.toString()
+            )
+        }
+    }
+}
